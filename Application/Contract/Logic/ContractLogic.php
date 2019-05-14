@@ -1,6 +1,6 @@
 <?php
 
-namespace app\contract\logic;
+namespace Contract\Logic;
 
 use think\Model;
 use think\Db;
@@ -21,7 +21,7 @@ class ContractLogic extends Model
     {
         $balance = 0;
         if (!empty($info['balance_amount'])) {
-            $use_amount = Db::name('contract_receipt')->where([
+            $use_amount = M('contract_receipt')->where([
                 'receipt_type' => 2,
                 'contract_no' => $info['contract_no']
             ])->sum('receipt_amount');
@@ -42,7 +42,7 @@ class ContractLogic extends Model
     public function checkContractBalance(&$info, $id = 0)
     {
         $msg = '';
-        $contract = Db::name('contract')->where('contract_no', $info['contract_no'])->find();
+        $contract = M('contract')->where('contract_no', $info['contract_no'])->find();
         if (empty($contract)) {
             $info['receipt_amount'] = 0;
             $msg = "冲抵合同{$info['contract_no']}不存在\r\n";
@@ -53,7 +53,7 @@ class ContractLogic extends Model
                     $msg = "冲抵合同{$info['contract_no']}可用结算余额不足\r\n";
                 }
             } else {
-                $old = Db::name('contract_receipt')->where('id', $id)->find();
+                $old = M('contract_receipt')->where('id', $id)->find();
                 if (!empty($old)) {
                     if ($old['receipt_type'] == 2) {
                         $dec = $info['receipt_amount'] - $old['receipt_amount'];
@@ -76,9 +76,9 @@ class ContractLogic extends Model
             $dec = $info['receipt_amount'];
         }
         if ($dec > 0) {
-            Db::name('contract')->where('contract_no', $info['contract_no'])->setDec('balance', $dec);
+            M('contract')->where('contract_no', $info['contract_no'])->setDec('balance', $dec);
         } elseif ($dec < 0) {
-            Db::name('contract')->where('contract_no', $info['contract_no'])->setInc('balance', abs($dec));
+            M('contract')->where('contract_no', $info['contract_no'])->setInc('balance', abs($dec));
         }
 
         return $msg;
@@ -93,9 +93,9 @@ class ContractLogic extends Model
      */
     public function calcReceipt($info, $auto_update = false)
     {
-        $amount = Db::name('contract_receipt')->where('contract_id', $info['contract_id'])->sum('receipt_amount');
+        $amount = M('contract_receipt')->where('contract_id', $info['contract_id'])->sum('receipt_amount');
         if ($auto_update) {
-            Db::name('contract')->where('contract_id', $info['contract_id'])->update(['total_receipt_amount' => $amount]);
+            M('contract')->where('contract_id', $info['contract_id'])->update(['total_receipt_amount' => $amount]);
         }
 
         return $amount;
@@ -110,12 +110,12 @@ class ContractLogic extends Model
      */
     public function calcMortgage($info, $auto_update = false)
     {
-        $amount = Db::name('contract_receipt')->where([
+        $amount = M('contract_receipt')->where([
             'receipt_type' => 2,
             'contract_no' => $info['contract_no']
         ])->sum('receipt_amount');
         if ($auto_update) {
-            Db::name('contract')->where('contract_no', $info['contract_no'])->update(['mortgage_amount' => $amount]);
+            M('contract')->where('contract_no', $info['contract_no'])->update(['mortgage_amount' => $amount]);
         }
 
         return $amount;
@@ -130,12 +130,12 @@ class ContractLogic extends Model
      */
     public function calcCharge($info, $auto_update = false)
     {
-        $amount = Db::name('contract_receipt')->where([
+        $amount = M('contract_receipt')->where([
             'receipt_type' => 2,
             'contract_id' => $info['contract_id']
         ])->sum('receipt_amount');
         if ($auto_update) {
-            Db::name('contract')->where('contract_id', $info['contract_id'])->update(['charge_amount' => $amount]);
+            M('contract')->where('contract_id', $info['contract_id'])->update(['charge_amount' => $amount]);
         }
 
         return $amount;
@@ -150,18 +150,18 @@ class ContractLogic extends Model
      */
     public function calcOverdue($info, $auto_update = false)
     {
-        $amount1 = Db::name('contract_expect')->where([
+        $amount1 = M('contract_expect')->where([
             'contract_id' => $info['contract_id'],
             'expect_date' => ['<', date('Y-m-d')]
         ])->sum('expect_amount');
-        $amount2 = Db::name('contract_receipt')->where([
+        $amount2 = M('contract_receipt')->where([
             'expect_date' => ['<', date('Y-m-d')],
             'receipt_date' => ['exp', Db::raw('<= expect_date')],
             'contract_id' => $info['contract_id']
         ])->sum('receipt_amount');
         $amount = $amount1 - $amount2;
         if ($auto_update) {
-            Db::name('contract')->where('contract_id', $info['contract_id'])->update(['overdue_amount' => $amount]);
+            M('contract')->where('contract_id', $info['contract_id'])->update(['overdue_amount' => $amount]);
         }
 
         return $amount;
@@ -176,11 +176,11 @@ class ContractLogic extends Model
      */
     public function calcAgencyFee($info, $auto_update = false)
     {
-        $amount = Db::name('contract_receipt')->where([
+        $amount = M('contract_receipt')->where([
             'contract_id' => $info['contract_id']
         ])->sum('agency_fee_amount');
         if ($auto_update) {
-            Db::name('contract')->where('contract_id', $info['contract_id'])->update(['agency_fee_amount' => $amount]);
+            M('contract')->where('contract_id', $info['contract_id'])->update(['agency_fee_amount' => $amount]);
         }
 
         return $amount;
@@ -195,11 +195,11 @@ class ContractLogic extends Model
      */
     public function calcDuty($info, $auto_update = false)
     {
-        $amount = Db::name('contract_duty')->where([
+        $amount = M('contract_duty')->where([
             'contract_id' => $info['contract_id']
         ])->value('duty_amount');
         if ($auto_update) {
-            Db::name('contract')->where('contract_id', $info['contract_id'])->update(['duty_amount' => $amount]);
+            M('contract')->where('contract_id', $info['contract_id'])->update(['duty_amount' => $amount]);
         }
 
         return $amount;

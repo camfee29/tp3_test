@@ -1,20 +1,34 @@
-<include file="public/layout" />
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- Apple devices fullscreen -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<!-- Apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="/Public/contract/contract.css" rel="stylesheet" type="text/css"/>
+<link href="/Public/contract/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+<script src="/Public/contract/layui/layui.js"></script>
+</head>
 
 <body>
 
 <div class="layui-container">
     <div class="title-center">
-        <h2>合同信息列表</h2>
+        <h2>到账信息</h2>
     </div>
     <div class="search-form">
-        <form class="layui-form" action="{:url('index')}" method="get">
+        <form class="layui-form" action="">
             <table style="width: 100%;">
                 <tr>
                     <td>
                         <div class="layui-form-item">
                             <label class="layui-form-label">合同编号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="contract_no" autocomplete="off" placeholder="流程合同编号" class="layui-input" value="{:isset($param.contract_no)?$param.contract_no:''}">
+                                <input type="text" name="contract_no" autocomplete="off" placeholder="流程合同编号" class="layui-input" value="<?php echo ($param["contract_no"]); ?>">
                             </div>
                         </div>
                     </td>
@@ -22,7 +36,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">ERP合同号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="erp_contract_no" autocomplete="off" placeholder="ERP合同号" class="layui-input" value="{:isset($param.erp_contract_no)?$param.erp_contract_no:''}">
+                                <input type="text" name="erp_contract_no" autocomplete="off" placeholder="ERP合同号" class="layui-input" value="<?php echo ($param["erp_contract_no"]); ?>">
                             </div>
                         </div>
                     </td>
@@ -30,7 +44,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">客户单位</label>
                             <div class="layui-input-block">
-                                <input type="text" name="customer" autocomplete="off" placeholder="客户单位" class="layui-input" value="{:isset($param.customer)?$param.customer:''}">
+                                <input type="text" name="customer" autocomplete="off" placeholder="客户单位" class="layui-input" value="<?php echo ($param["customer"]); ?>">
                             </div>
                         </div>
                     </td>
@@ -38,7 +52,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">4A代理公司</label>
                             <div class="layui-input-block">
-                                <input type="text" name="agency" autocomplete="off" placeholder="4A代理公司" class="layui-input" value="{:isset($param.agency)?$param.agency:''}">
+                                <input type="text" name="agency" autocomplete="off" placeholder="4A代理公司" class="layui-input" value="<?php echo ($param["agency"]); ?>">
                             </div>
                         </div>
                     </td>
@@ -48,41 +62,15 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">品牌</label>
                             <div class="layui-input-block">
-                                <input type="text" name="brand" autocomplete="off" placeholder="品牌" class="layui-input" value="{:isset($param.brand)?$param.brand:''}">
+                                <input type="text" name="brand" autocomplete="off" placeholder="品牌" class="layui-input" value="<?php echo ($param["brand"]); ?>">
                             </div>
                         </div>
                     </td>
-                    <td>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">直客组</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="direct_group" autocomplete="off" placeholder="直客组" class="layui-input" value="{:isset($param.direct_group)?$param.direct_group:''}">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">直客经理</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="direct_manager" autocomplete="off" placeholder="直客经理" class="layui-input" value="{:isset($param.direct_manager)?$param.direct_manager:''}">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">广告类型</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="ad_type" autocomplete="off" placeholder="4A代理公司" class="layui-input" value="{:isset($param.ad_type)?$param.ad_type:''}">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
                     <td>
                         <div class="layui-form-item">
                             <label class="layui-form-label">渠道组</label>
                             <div class="layui-input-block">
-                                <input type="text" name="channel" autocomplete="off" placeholder="渠道组" class="layui-input" value="{:isset($param.channel)?$param.channel:''}">
+                                <input type="text" name="channel" autocomplete="off" placeholder="渠道组" class="layui-input" value="<?php echo ($param["channel"]); ?>">
                             </div>
                         </div>
                     </td>
@@ -90,20 +78,30 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">渠道经理</label>
                             <div class="layui-input-block">
-                                <input type="text" name="channel_manager" autocomplete="off" placeholder="渠道经理" class="layui-input" value="{:isset($param.channel_manager)?$param.channel_manager:''}">
+                                <input type="text" name="channel_manager" autocomplete="off" placeholder="渠道经理" class="layui-input" value="<?php echo ($param["channel_manager"]); ?>">
                             </div>
                         </div>
                     </td>
+                    <td>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">广告类型</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="ad_type" autocomplete="off" placeholder="4A代理公司" class="layui-input" value="<?php echo ($param["ad_type"]); ?>">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2">
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <label class="layui-form-label">日期区间</label>
                                 <div class="layui-input-inline" style="width: 130px;">
-                                    <input type="text" id="start_time" name="start_time" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="{:isset($param.start_time)?$param.start_time:''}">
+                                    <input type="text" id="start_time" name="start_time" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="<?php echo ($param["start_time"]); ?>">
                                 </div>
                                 <div class="layui-form-mid">-</div>
                                 <div class="layui-input-inline" style="width: 130px;">
-                                    <input type="text" id="end_time" name="end_time" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="{:isset($param.end_time)?$param.end_time:''}">
+                                    <input type="text" id="end_time" name="end_time" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="<?php echo ($param["end_time"]); ?>">
                                 </div>
                             </div>
                         </div>
@@ -119,13 +117,16 @@
         </form>
     </div>
 
-    <div><a href="{:url('add')}" class="layui-btn">新增</a></div>
-
-    <table class="layui-table" lay-data="{url:'{:url("ajaxIndex",$param)}', page:true, id:'data_table'}" lay-filter="data_table">
+    <table class="layui-table" lay-data="{url:'<?php echo U("ajaxReceipt",$param);?>', page:true, id:'data_table'}" lay-filter="data_table">
         <thead>
         <tr>
-            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'contract_id', width:80, sort: true}">序号</th>
+            <th lay-data="{field:'id', width:80, sort: true}">序号</th>
+            <th lay-data="{field:'receipt_date', width:110, sort: true}">到账日期</th>
+            <th lay-data="{field:'receipt_amount', width:95, sort: true}">到账金额</th>
+            <th lay-data="{field:'receipt_type', width:90}">到账类型</th>
+            <th lay-data="{field:'ex_contract_no', width:120, sort: true}">冲抵合同编号</th>
+            <th lay-data="{field:'expect_date', width:110, sort: true}">应收日期</th>
+            <th lay-data="{field:'expect_amount', width:95, sort: true}">应收金额</th>
             <th lay-data="{field:'launch_time', width:120, sort: true}">合同发起时间</th>
             <th lay-data="{field:'contract_no', width:120}">流程合同编号</th>
             <th lay-data="{field:'erp_contract_no', width:105}">ERP合同号</th>
@@ -146,27 +147,10 @@
             <th lay-data="{field:'final_amount', width:120, sort: true}">合同结算金额</th>
             <th lay-data="{field:'balance_amount', width:95, sort: true}">结算余额</th>
             <th lay-data="{field:'balance', width:120, sort: true}">可用结算余额</th>
-            <th lay-data="{field:'ad_type', width:95}">广告类型</th>
-            <th lay-data="{field:'total_receipt_amount', width:95, sort: true}">到款总计</th>
-            <th lay-data="{field:'mortgage_amount', width:95, sort: true}">冲抵金额</th>
-            <th lay-data="{field:'charge_amount', width:95, sort: true}">充抵金额</th>
-            <th lay-data="{field:'overdue_amount', width:95, sort: true}">逾期金额</th>
-            <th lay-data="{field:'agency_fee_amount', width:140, sort: true}">累计代理服务费</th>
-            <th lay-data="{field:'duty_amount', width:95, sort: true}">累计权责</th>
-            <th lay-data="{field:'is_erp', width:120}">是否录入ERP</th>
-            <th lay-data="{field:'archive', width:95}">合同存档</th>
-            <th lay-data="{fixed: 'right', width:215, align:'center', toolbar: '#barOperate'}">操作</th>
+            <th lay-data="{field:'ad_type', width:95, sort: true}">广告类型</th>
         </tr>
         </thead>
     </table>
-
-    <script type="text/html" id="barOperate">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="expect">应收</a>
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="receipt">到账</a>
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="duty">权责</a>
-        <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
-    </script>
 </div>
 
 <script>
@@ -199,17 +183,13 @@
                     layer.close(index);
                 });
             } else if(obj.event === 'edit'){
-                location.href="{:url('add')}?id="+data.contract_id;
-                //layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
             } else if(obj.event === 'expect'){ // 应收
-                location.href="{:url('expect_receipt')}?contract_id="+data.contract_id;
-                //layer.alert('应收：<br>'+ JSON.stringify(data))
+                layer.alert('应收：<br>'+ JSON.stringify(data))
             } else if(obj.event === 'receipt'){  // 到账
-                location.href="{:url('expect_receipt')}?contract_id="+data.contract_id;
-                //layer.alert('到账：<br>'+ JSON.stringify(data))
+                layer.alert('到账：<br>'+ JSON.stringify(data))
             } else if(obj.event === 'duty'){ // 权责
-                location.href="{:url('duty')}?contract_id="+data.contract_id;
-                //layer.alert('权责：<br>'+ JSON.stringify(data))
+                layer.alert('权责：<br>'+ JSON.stringify(data))
             }
         });
 

@@ -7,7 +7,7 @@
         <h2>合同应收到账信息</h2>
     </div>
     <div class="form-container" id="form-container">
-        <form class="layui-form" method="post" action="{:url('expect_receipt')}">
+        <form class="layui-form" method="post" action="{:U('expect_receipt')}">
             <input type="hidden" name="contract_id" id="contract_id" value="{$contract_id}">
             <div class="div">
                 <div>
@@ -158,7 +158,7 @@
         function init_receipt_data(obj, date) {
             var id = $('#contract_id').val();
             var pobj = obj.parent().parent();
-            $.getJSON("{:url('ajaxCheckExpectDate')}",{id:id,date:date},function (ret) {
+            $.getJSON("{:U('ajaxCheckExpectDate')}",{id:id,date:date},function (ret) {
                 if (ret != null && Object.keys(ret).length) {
                     updateRate(pobj, ret);
                     var receipt_amount = parseFloat(pobj.find('input[name="receipt[receipt_amount][]"]').val()||0);
