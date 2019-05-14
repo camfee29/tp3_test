@@ -1,0 +1,6 @@
+[ 2019-05-14T17:01:33+08:00 ] 127.0.0.1 /contract/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000004s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000033s ]
+ERR: 无法加载模块:Contract
+

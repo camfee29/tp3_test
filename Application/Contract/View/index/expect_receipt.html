@@ -1,0 +1,280 @@
+<include file="public/layout" />
+
+<body>
+
+<div class="layui-container">
+    <div class="title-center">
+        <h2>合同应收到账信息</h2>
+    </div>
+    <div class="form-container" id="form-container">
+        <form class="layui-form" method="post" action="{:url('expect_receipt')}">
+            <input type="hidden" name="contract_id" id="contract_id" value="{$contract_id}">
+            <div class="div">
+                <div>
+                    <a href="javascript:void(0)" class="layui-btn" id="add_tpl_expect">增行</a>
+                    <a href="javascript:void(0)" class="layui-btn layui-btn-primary" id="del_tpl_expect">删行</a>
+                    &nbsp; &nbsp; <span>应收信息</span>
+                </div>
+                <table class="layui-table" id="table-expect" style="width: auto;">
+                    <tr>
+                        <td>应收日期</td>
+                        <td>应收金额</td>
+                        <td>是否已返点</td>
+                    </tr>
+                    <volist name="expect" id="vo">
+                    <tr>
+                        <td class="input-td"><input type="text" name="expect[expect_date][]" value="{$vo.expect_date}" class="input-text date-select"><input type="hidden" name="expect[id][]" value="{$vo.id}"></td>
+                        <td class="input-td"><input type="text" name="expect[expect_amount][]" value="{$vo.expect_amount}" class="input-text"></td>
+                        <td class="input-td"><select name="expect[is_return][]" class="input-select"><option value="0" <if condition="$vo.is_return eq 0">selected</if> >否</option><option value="1" <if condition="$vo.is_return eq 1">selected</if> >是</option></select></td>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+
+            <div class="div">
+                <div>
+                    <a href="javascript:void(0)" class="layui-btn" id="add_tpl_receipt">增行</a>
+                    <a href="javascript:void(0)" class="layui-btn layui-btn-primary" id="del_tpl_receipt">删行</a>
+                    &nbsp; &nbsp; <span>到账信息</span>
+                </div>
+                <div class="" style="overflow: auto;">
+                    <div style="width: 2700px;">
+                <table class="layui-table" id="table-receipt" style="width: auto;">
+                    <colgroup>
+                        <col width="100">
+                        <col width="100">
+                        <col width="100">
+                        <col width="100">
+                        <col width="100">
+                        <col width="120">
+                        <col width="120">
+                        <col width="150">
+                        <col width="120">
+                        <col width="180">
+                        <col width="150">
+                        <col width="120">
+                        <col width="120">
+                        <col width="120">
+                        <col width="130">
+                        <col width="160">
+                        <col width="140">
+                        <col width="120">
+                        <col width="120">
+                        <col width="180">
+                        <col width="150">
+                    </colgroup>
+                    <tr>
+                        <td>应收日期</td>
+                        <td>应收金额</td>
+                        <td>到账日期</td>
+                        <td>到账金额</td>
+                        <td>到账类型</td>
+                        <td>冲抵合同编号</td>
+                        <td>是否已返点</td>
+                        <td>本土新品奖励比例</td>
+                        <td>本土新品奖励</td>
+                        <td>本土按时垫资奖励比例</td>
+                        <td>本土按时垫资奖励</td>
+                        <td>本土特殊比例</td>
+                        <td>本土特殊金额</td>
+                        <td>4A基础比例</td>
+                        <td>4A基础金额</td>
+                        <td>4A按时垫资奖励比例</td>
+                        <td>4A按时垫资奖励</td>
+                        <td>4A特殊比例</td>
+                        <td>4A特殊金额</td>
+                        <td>4A集团代理服务费比例</td>
+                        <td>4A集团代理服务费</td>
+                    </tr>
+                    <volist name="receipt" id="vo">
+                    <tr>
+                        <td class="input-td"><input type="text" name="receipt[expect_date][]" value="{$vo.expect_date}" class="input-text date-select"><input type="hidden" name="receipt[id][]" value="{$vo.id}"></td>
+                        <td class="input-td"><input type="text" name="receipt[expect_amount][]" value="{$vo.expect_amount}" class="input-text"></td>
+                        <td class="input-td"><input type="text" name="receipt[receipt_date][]" value="{$vo.receipt_date}" class="input-text date-select"></td>
+                        <td class="input-td"><input type="text" name="receipt[receipt_amount][]" value="{$vo.receipt_amount}" class="input-text data-change"></td>
+                        <td class="input-td"><select name="receipt[receipt_type][]" class="input-select"><option value="1" <if condition="$vo.receipt_type eq 1">selected</if>>现金</option><option value="2" <if condition="$vo.receipt_type eq 2">selected</if>>冲抵</option></select></td>
+                        <td class="input-td"><input type="text" name="receipt[contract_no][]" value="{$vo.contract_no}" class="input-text"></td>
+                        <td class="input-td"><select name="receipt[is_return][]" class="input-select"><option value="0" <if condition="$vo.is_return eq 0">selected</if>>否</option><option value="1" <if condition="$vo.is_return eq 1">selected</if>>是</option></select></td>
+                        <td class="input-td"><input type="text" name="receipt[local_new][]" value="{$vo.local_new}" class="input-text data-change"></td>
+                        <td class="input-td"><input type="text" name="receipt[local_new_amount][]" value="{$vo.local_new_amount}" class="input-text"></td>
+                        <td class="input-td"><input type="text" name="receipt[local_fund][]" value="{$vo.local_fund}" class="input-text data-change"></td>
+                        <td class="input-td"><input type="text" name="receipt[local_fund_amount][]" value="{$vo.local_fund_amount}" class="input-text"></td>
+                        <td class="input-td"><input type="text" name="receipt[local_special][]" value="{$vo.local_special}" class="input-text data-change"></td>
+                        <td class="input-td"><input type="text" name="receipt[local_special_amount][]" value="{$vo.local_special_amount}" class="input-text"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_base][]" value="{$vo.agency_base}" class="input-text data-change"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_base_amount][]" value="{$vo.agency_base_amount}" class="input-text"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_fund][]" value="{$vo.agency_fund}" class="input-text data-change"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_fund_amount][]" value="{$vo.agency_fund_amount}" class="input-text"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_special][]" value="{$vo.agency_special}" class="input-text data-change"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_special_amount][]" value="{$vo.agency_special_amount}" class="input-text"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_fee][]" value="{$vo.agency_fee}" class="input-text data-change"></td>
+                        <td class="input-td"><input type="text" name="receipt[agency_fee_amount][]" value="{$vo.agency_fee_amount}" class="input-text"></td>
+                    </tr>
+                    </volist>
+                </table>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: center">
+                <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
+                <a href="javascript:history.back();" class="layui-btn layui-btn-primary" lay-submit="" lay-filter="return">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    layui.use(['form', 'laydate'], function(){
+        var $ = layui.$;
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate;
+        //日期
+        laydate.render({
+            elem: '#launch_time',
+            trigger: 'click',
+        });
+        laydate.render({
+            elem: '#start_time',
+            trigger: 'click',
+        });
+        laydate.render({
+            elem: '#end_time',
+            trigger: 'click',
+        });
+        $(".date-select").each(function () {
+            laydate.render({
+                elem: this, //指定元素
+                trigger: 'click',
+                done: function(value, date, endDate) {
+                    var name = this.elem.attr('name');
+                    if (value && name == 'receipt[expect_date][]') {
+                        init_receipt_data($(this.elem), value);
+                    }
+                }
+            });
+        });
+        // 到账应收、比例信息获取
+        function init_receipt_data(obj, date) {
+            var id = $('#contract_id').val();
+            var pobj = obj.parent().parent();
+            $.getJSON("{:url('ajaxCheckExpectDate')}",{id:id,date:date},function (ret) {
+                if (ret != null && Object.keys(ret).length) {
+                    updateRate(pobj, ret);
+                    var receipt_amount = parseFloat(pobj.find('input[name="receipt[receipt_amount][]"]').val()||0);
+                    if (receipt_amount > 0) {
+                        ret.local_new_amount=((ret.local_new*receipt_amount)/100).toFixed(2);
+                        ret.local_fund_amount=((ret.local_fund*receipt_amount)/100).toFixed(2);
+                        ret.local_special_amount=((ret.local_special*receipt_amount)/100).toFixed(2);
+                        ret.agency_base_amount=((ret.agency_base*receipt_amount)/100).toFixed(2);
+                        ret.agency_fund_amount=((ret.agency_fund*receipt_amount)/100).toFixed(2);
+                        ret.agency_special_amount=((ret.agency_special*receipt_amount)/100).toFixed(2);
+                        ret.agency_fee_amount=((ret.agency_fee*receipt_amount)/100).toFixed(2);
+                        updateRateAmount(pobj, ret);
+                    }
+                }
+            });
+        }
+        // 更新应收、比例
+        function updateRate(pobj,ret) {
+            pobj.find('input[name="receipt[expect_amount][]"]').val(ret.expect_amount);
+            pobj.find('input[name="receipt[local_new][]"]').val(ret.local_new);
+            pobj.find('input[name="receipt[local_fund][]"]').val(ret.local_fund);
+            pobj.find('input[name="receipt[local_special][]"]').val(ret.local_special);
+            pobj.find('input[name="receipt[agency_base][]"]').val(ret.agency_base);
+            pobj.find('input[name="receipt[agency_fund][]"]').val(ret.agency_fund);
+            pobj.find('input[name="receipt[agency_special][]"]').val(ret.agency_special);
+            pobj.find('input[name="receipt[agency_fee][]"]').val(ret.agency_fee);
+        }
+        // 更新比例金额
+        function updateRateAmount(pobj,ret) {
+            pobj.find('input[name="receipt[local_new_amount][]"]').val(ret.local_new_amount);
+            pobj.find('input[name="receipt[local_fund_amount][]"]').val(ret.local_fund_amount);
+            pobj.find('input[name="receipt[local_special_amount][]"]').val(ret.local_special_amount);
+            pobj.find('input[name="receipt[agency_base_amount][]"]').val(ret.agency_base_amount);
+            pobj.find('input[name="receipt[agency_fund_amount][]"]').val(ret.agency_fund_amount);
+            pobj.find('input[name="receipt[agency_special_amount][]"]').val(ret.agency_special_amount);
+            pobj.find('input[name="receipt[agency_fee_amount][]"]').val(ret.agency_fee_amount);
+        }
+        $('.data-change').on('change',function () {
+            var name = $(this).attr('name');
+            var pobj = $(this).parent().parent();
+            updateReceiptAmount(name,pobj);
+        });
+        // 修改到账、比例更新对应金额
+        function updateReceiptAmount(name,pobj){
+            var receipt_amount = parseFloat(pobj.find('input[name="receipt[receipt_amount][]"]').val()||0);
+            if (name == 'receipt[receipt_amount][]') {
+                var ret = {};
+                ret.local_new = parseFloat(pobj.find('input[name="receipt[local_new][]"]').val()||0);
+                ret.local_fund = parseFloat(pobj.find('input[name="receipt[local_fund][]"]').val()||0);
+                ret.local_special = parseFloat(pobj.find('input[name="receipt[local_special][]"]').val()||0);
+                ret.agency_base = parseFloat(pobj.find('input[name="receipt[agency_base][]"]').val()||0);
+                ret.agency_fund = parseFloat(pobj.find('input[name="receipt[agency_fund][]"]').val()||0);
+                ret.agency_special = parseFloat(pobj.find('input[name="receipt[agency_special][]"]').val()||0);
+                ret.agency_fee = parseFloat(pobj.find('input[name="receipt[agency_fee][]"]').val()||0);
+                ret.local_new_amount=((ret.local_new*receipt_amount)/100).toFixed(2);
+                ret.local_fund_amount=((ret.local_fund*receipt_amount)/100).toFixed(2);
+                ret.local_special_amount=((ret.local_special*receipt_amount)/100).toFixed(2);
+                ret.agency_base_amount=((ret.agency_base*receipt_amount)/100).toFixed(2);
+                ret.agency_fund_amount=((ret.agency_fund*receipt_amount)/100).toFixed(2);
+                ret.agency_special_amount=((ret.agency_special*receipt_amount)/100).toFixed(2);
+                ret.agency_fee_amount=((ret.agency_fee*receipt_amount)/100).toFixed(2);
+                updateRateAmount(pobj, ret);
+            } else {
+                var rate = parseFloat(pobj.find('input[name="'+name+'"]').val()||0);
+                var amount = ((rate*receipt_amount)/100).toFixed(2);
+                pobj.find('input[name="'+name.replace('][]','_amount][]')+'"]').val(amount);
+            }
+        }
+        $('#add_tpl_expect').on('click',function () {
+            var tpl = '<tr><td class="input-td"><input type="text" name="expect[expect_date][]" value="" class="input-text date-select"><input type="hidden" name="expect[id][]"></td><td class="input-td"><input type="text" name="expect[expect_amount][]" value="" class="input-text"></td><td class="input-td"><select name="expect[is_return][]" class="input-select"><option value="0">否</option><option value="1">是</option></select></td></tr>';
+            $('#table-expect').append(tpl);
+            form.render();
+            $(".date-select").each(function () {
+                laydate.render({
+                    elem: this, //指定元素
+                    trigger: 'click',
+                });
+            });
+        });
+        $('#del_tpl_expect').on('click',function () {
+            if ($('#table-expect tr').size() > 1) {
+                $('#table-expect tr').last().remove();
+            } else {
+                layer.alert('已全部删除',{'icon':2});
+            }
+        });
+        $('#add_tpl_receipt').on('click',function () {
+            var tpl = '<tr><td class="input-td"><input type="text" name="receipt[expect_date][]" class="input-text date-select"><input type="hidden" name="receipt[id][]"></td><td class="input-td"><input type="text" name="receipt[expect_amount][]" class="input-text"></td><td class="input-td"><input type="text" name="receipt[receipt_date][]"  class="input-text date-select"></td><td class="input-td"><input type="text" name="receipt[receipt_amount][]" class="input-text data-change"></td><td class="input-td"><select name="receipt[receipt_type][]" class="input-select"><option value="1">现金</option><option value="2">冲抵</option></select></td><td class="input-td"><input type="text" name="receipt[contract_no][]" class="input-text"></td><td class="input-td"><select name="receipt[is_return][]" class="input-select"><option value="0">否</option><option value="1">是</option></select></td><td class="input-td"><input type="text" name="receipt[local_new][]" class="input-text data-change"></td><td class="input-td"><input type="text" name="receipt[local_new_amount][]" class="input-text"></td><td class="input-td"><input type="text" name="receipt[local_fund][]" class="input-text data-change"></td><td class="input-td"><input type="text" name="receipt[local_fund_amount][]" class="input-text"></td><td class="input-td"><input type="text" name="receipt[local_special][]" class="input-text data-change"></td><td class="input-td"><input type="text" name="receipt[local_special_amount][]" class="input-text"></td><td class="input-td"><input type="text" name="receipt[agency_base][]" class="input-text data-change"></td><td class="input-td"><input type="text" name="receipt[agency_base_amount][]" class="input-text"></td><td class="input-td"><input type="text" name="receipt[agency_fund][]" class="input-text data-change"></td><td class="input-td"><input type="text" name="receipt[agency_fund_amount][]" class="input-text"></td><td class="input-td"><input type="text" name="receipt[agency_special][]" class="input-text data-change"></td><td class="input-td"><input type="text" name="receipt[agency_special_amount][]" class="input-text"></td><td class="input-td"><input type="text" name="receipt[agency_fee][]" class="input-text data-change"></td><td class="input-td"><input type="text" name="receipt[agency_fee_amount][]" class="input-text"></td></tr>';
+            $('#table-receipt').append(tpl);
+            form.render();
+            $(".date-select").each(function () {
+                laydate.render({
+                    elem: this, //指定元素
+                    trigger: 'click',
+                    done: function(value, date, endDate) {
+                        var name = this.elem.attr('name');
+                        if (value && name == 'receipt[expect_date][]') {
+                            init_receipt_data($(this.elem), value);
+                        }
+                    }
+                });
+            });
+            $('.data-change').on('change',function () {
+                var name = $(this).attr('name');
+                var pobj = $(this).parent().parent();
+                updateReceiptAmount(name,pobj);
+            });
+        });
+        $('#del_tpl_receipt').on('click',function () {
+            if ($('#table-receipt tr').size() > 1) {
+                $('#table-receipt tr').last().remove();
+            } else {
+                layer.alert('已全部删除',{'icon':2});
+            }
+        });
+    });
+</script>
+</body>
+</html>
